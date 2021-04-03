@@ -1,30 +1,36 @@
 <script>
-	export let name;
+  let timeLeft = '25:00';
+  // on:click - start timer
+  // on:click - pause timer
+  // reset button
+  // toggle work / break button
+
+  // custom timers
+  // save timers
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+  <button>{timeLeft}</button>
 </main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+  main {
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto;
+  }
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
+  button {
+    color: white;
+    font-size: 300%;
+    border: none;
+    border-radius: 50%;
+    background-color: tomato;
+    width: 500px;
+    height: 500px;
+  }
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  button:active {
+    background-color: brown;
+  }
 </style>
