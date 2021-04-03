@@ -1,5 +1,7 @@
 <script>
-  let timeLeft = '25:00';
+  let interval;
+  let running = false;
+  let timeLeft = 25 * 60 * 60 * 1000;
   // on:click - start timer
   // on:click - pause timer
   // reset button
@@ -7,6 +9,14 @@
 
   // custom timers
   // save timers
+
+  // handleClick = () => {
+  // 	if (!running) {
+  // 		interval = setInterval(() => {
+  // 			timeLeft
+  // 		}, 1000);
+  // 	}
+  // }
 </script>
 
 <main>
