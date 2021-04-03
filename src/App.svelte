@@ -2,25 +2,34 @@
   let interval;
   let running = false;
   let timeLeft = 25 * 60 * 60 * 1000;
-  // on:click - start timer
-  // on:click - pause timer
+
   // reset button
   // toggle work / break button
 
   // custom timers
   // save timers
 
-  // handleClick = () => {
-  // 	if (!running) {
-  // 		interval = setInterval(() => {
-  // 			timeLeft
-  // 		}, 1000);
-  // 	}
-  // }
+  const handleClick = () => {
+    if (!running) {
+      running = true;
+      interval = setInterval(() => {
+        timeLeft -= 10;
+      }, 10);
+    } else {
+      running = false;
+      clearInterval(interval);
+    }
+  };
+
+  const format = ms => {
+    const min = Math.floor(ms / 1000 / 60 / 60).toString();
+    const sec = Math.floor((ms / 1000) % 60).toString();
+    return `${min}:${sec.padStart(2, '0')}`;
+  };
 </script>
 
 <main>
-  <button>{timeLeft}</button>
+  <button on:click={handleClick}>{format(timeLeft)}</button>
 </main>
 
 <style>
