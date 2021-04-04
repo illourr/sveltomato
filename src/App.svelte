@@ -1,7 +1,8 @@
 <script>
   let interval;
   let running = false;
-  let timeLeft = 25 * 60 * 60 * 1000;
+  export let initialTime = 25 * 60 * 60 * 1000;
+  let timeLeft = initialTime;
 
   // reset button
   // toggle work / break button
@@ -9,16 +10,21 @@
   // custom timers
   // save timers
 
-  const handleClick = () => {
+  const handlePlayPause = () => {
     if (!running) {
-      running = true;
       interval = setInterval(() => {
         timeLeft -= 10;
       }, 10);
     } else {
-      running = false;
       clearInterval(interval);
     }
+    running = !running;
+  };
+
+  const handleReset = () => {
+    clearInterval(interval);
+    timeLeft = initialTime;
+    running = false;
   };
 
   const format = ms => {
@@ -29,7 +35,12 @@
 </script>
 
 <main>
-  <button on:click={handleClick}>{format(timeLeft)}</button>
+  <button class="tomato" on:click={handlePlayPause}>{format(timeLeft)}</button>
+  <div class="controls">
+    <button on:click={handleReset}>Reset</button>
+    <button>Short break</button>
+    <button>Long break</button>
+  </div>
 </main>
 
 <style>
@@ -39,9 +50,9 @@
     margin: 0 auto;
   }
 
-  button {
+  button.tomato {
     color: white;
-    font-size: 300%;
+    font-size: 500%;
     border: none;
     border-radius: 50%;
     background-color: tomato;
@@ -49,7 +60,24 @@
     height: 500px;
   }
 
-  button:active {
+  button.tomato:active {
     background-color: brown;
+  }
+
+  button.tomato:focus {
+    outline: none;
+    box-shadow: 0px 0px 0px 2px green;
+  }
+
+  .controls {
+    display: flex;
+    margin: auto;
+    max-width: 600px;
+    text-align: center;
+    justify-content: space-around;
+  }
+
+  .controls button {
+    flex: 1;
   }
 </style>
