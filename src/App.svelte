@@ -1,8 +1,12 @@
 <script>
+  const MINUTES_IN_MS = 60 * 60 * 1000;
+
   let interval;
   let running = false;
-  export let initialTime = 25 * 60 * 60 * 1000;
+  export let initialTime = 25 * MINUTES_IN_MS;
   let timeLeft = initialTime;
+
+  // AUDIO
 
   // reset button
   // toggle work / break button
@@ -27,6 +31,18 @@
     running = false;
   };
 
+  const handleShortBreak = () => {
+    clearInterval(interval);
+    timeLeft = 5 * MINUTES_IN_MS;
+    running = false;
+  };
+
+  const handleLongBreak = () => {
+    clearInterval(interval);
+    timeLeft = 15 * MINUTES_IN_MS;
+    running = false;
+  };
+
   const format = ms => {
     const min = Math.floor(ms / 1000 / 60 / 60).toString();
     const sec = Math.floor((ms / 1000) % 60).toString();
@@ -42,8 +58,8 @@
   </div>
   <div class="controls">
     <button on:click={handleReset}>Reset</button>
-    <button>Short break</button>
-    <button>Long break</button>
+    <button on:click={handleShortBreak}>Short break</button>
+    <button on:click={handleLongBreak}>Long break</button>
   </div>
 </main>
 
