@@ -35,7 +35,11 @@
 </script>
 
 <main>
-  <button class="tomato" on:click={handlePlayPause}>{format(timeLeft)}</button>
+  <div>
+    <span class="stem">*</span>
+    <button class="tomato" on:click={handlePlayPause}>{format(timeLeft)}</button
+    >
+  </div>
   <div class="controls">
     <button on:click={handleReset}>Reset</button>
     <button>Short break</button>
@@ -52,7 +56,7 @@
 
   button.tomato {
     color: white;
-    font-size: 500%;
+    font-size: 400%;
     border: none;
     border-radius: 50%;
     background-color: tomato;
@@ -67,6 +71,27 @@
   button.tomato:focus {
     outline: none;
     box-shadow: 0px 0px 0px 2px green;
+  }
+
+  .stem {
+    font-size: 600%;
+    font-weight: 700;
+    color: green;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media screen and (max-width: 550px) {
+    button.tomato {
+      font-size: 12vw;
+      width: 80vw;
+      height: 80vw;
+    }
+
+    .stem {
+      font-size: 15vw;
+    }
   }
 
   .controls {
