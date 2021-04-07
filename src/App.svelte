@@ -214,7 +214,7 @@
   }
 
   .controls button:focus {
-    outline: 2px solid green;
+    outline: 2px solid cornflowerblue;
   }
 
   .controls button.active {
