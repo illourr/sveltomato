@@ -77,7 +77,10 @@
 <main>
   <div>
     <span class="stem">*</span>
-    <button class="tomato" on:click={handlePlayPause}
+    <button
+      class="tomato"
+      data-testid="tomato-button"
+      on:click={handlePlayPause}
       ><p>{tomatoText}</p>
       <h2>{format(timeLeft)}</h2></button
     >
