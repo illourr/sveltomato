@@ -32,6 +32,8 @@
 
   let tomatoText = 'Lavora!';
 
+  $: getActive = timer => (timer === currentTimer ? 'active' : '');
+
   const handlePlayPause = () => {
     return running ? pause() : play();
   };
@@ -85,11 +87,23 @@
       <h2>{format(timeLeft)}</h2></button
     >
   </div>
-  <div class="controls">
-    <button on:click={handleReset}>Reset</button>
-    <button on:click={() => handleTimer(timers.pomodoro)}>Pomodoro</button>
-    <button on:click={() => handleTimer(timers.short)}>Festa corta</button>
-    <button on:click={() => handleTimer(timers.long)}>Festa lunga</button>
+  <div class="panel">
+    <div class="controls">
+      <!-- TODO: Make this a radio group -->
+      <button
+        class={getActive(timers.pomodoro)}
+        on:click={() => handleTimer(timers.pomodoro)}>Pomodoro</button
+      >
+      <button
+        class={getActive(timers.short)}
+        on:click={() => handleTimer(timers.short)}>Festa corta</button
+      >
+      <button
+        class={getActive(timers.long)}
+        on:click={() => handleTimer(timers.long)}>Festa lunga</button
+      >
+    </div>
+    <button class="text" on:click={handleReset}>Reset</button>
     {#if showTest}
       <button on:click={() => handleTimer(timers.test)}>Test</button>
     {/if}
@@ -128,7 +142,7 @@
 
   button.tomato:focus {
     outline: none;
-    box-shadow: 0px 0px 0px 4px green;
+    box-shadow: 0px 0px 0px 4px red;
   }
 
   button.tomato:hover {
@@ -138,10 +152,25 @@
   .stem {
     font-size: 600%;
     font-weight: 700;
-    color: green;
+    color: limegreen;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  button.text {
+    background: none;
+    border: none;
+    padding: 1em;
+    color: limegreen;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 1em auto;
+  }
+
+  button.text:focus {
+    outline: none;
+    box-shadow: 0px 0px 0px 2px cornflowerblue;
   }
 
   @media screen and (max-width: 550px) {
@@ -154,17 +183,42 @@
     .stem {
       font-size: 15vw;
     }
+
+    .controls {
+      flex-direction: column;
+    }
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 600px;
+    text-align: center;
   }
 
   .controls {
     display: flex;
-    margin: auto;
-    max-width: 600px;
-    text-align: center;
     justify-content: space-around;
   }
 
   .controls button {
     flex: 1;
+    font-weight: bold;
+    border: 2px solid limegreen;
+    border-radius: 0;
+    background-color: limegreen;
+    color: white;
+    text-transform: uppercase;
+    padding: 1em;
+  }
+
+  .controls button:focus {
+    outline: 2px solid green;
+  }
+
+  .controls button.active {
+    background-color: white;
+    color: limegreen;
   }
 </style>
