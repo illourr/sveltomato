@@ -1,46 +1,69 @@
 <script>
   const MINUTES_IN_MS = 60 * 60 * 1000;
 
+  const timers = {
+    pomodoro: {
+      time: 25 * MINUTES_IN_MS,
+      text: 'Lavora!',
+    },
+    short: {
+      time: 5 * MINUTES_IN_MS,
+      text: 'Relax.',
+    },
+    long: {
+      time: 15 * MINUTES_IN_MS,
+      text: 'Dai. Relax.',
+    },
+    test: {
+      time: 3000,
+      text: 'Testing',
+    },
+  };
+
+  // export let initialTime = timers.pomodoro.time;
   let interval;
   let running = false;
-  export let initialTime = 25 * MINUTES_IN_MS;
-  let timeLeft = initialTime;
-
-  // AUDIO
-
-  // reset button
-  // toggle work / break button
+  let currentTimer = timers.pomodoro;
+  let timeLeft = currentTimer.time;
 
   // custom timers
   // save timers
 
+  let tomatoText = 'Lavora!';
+
   const handlePlayPause = () => {
-    if (!running) {
-      interval = setInterval(() => {
-        timeLeft -= 10;
-      }, 10);
-    } else {
-      clearInterval(interval);
-    }
-    running = !running;
+    return running ? pause() : play();
+  };
+
+  const play = () => {
+    running = true;
+    interval = setInterval(() => {
+      timeLeft -= 1000;
+      if (timeLeft <= 0) {
+        timeLeft = 0;
+        clearInterval(interval);
+        // Make some noise
+      }
+    }, 1000);
+  };
+
+  const pause = () => {
+    running = false;
+    clearInterval(interval);
   };
 
   const handleReset = () => {
     clearInterval(interval);
-    timeLeft = initialTime;
-    running = false;
+    timeLeft = currentTimer.time;
+    pause();
   };
 
-  const handleShortBreak = () => {
+  const handleTimer = type => {
     clearInterval(interval);
-    timeLeft = 5 * MINUTES_IN_MS;
-    running = false;
-  };
-
-  const handleLongBreak = () => {
-    clearInterval(interval);
-    timeLeft = 15 * MINUTES_IN_MS;
-    running = false;
+    timeLeft = type.time;
+    tomatoText = type.text;
+    currentTimer = type;
+    play();
   };
 
   const format = ms => {
@@ -53,13 +76,17 @@
 <main>
   <div>
     <span class="stem">*</span>
-    <button class="tomato" on:click={handlePlayPause}>{format(timeLeft)}</button
+    <button class="tomato" on:click={handlePlayPause}
+      ><p>{tomatoText}</p>
+      <h2>{format(timeLeft)}</h2></button
     >
   </div>
   <div class="controls">
     <button on:click={handleReset}>Reset</button>
-    <button on:click={handleShortBreak}>Short break</button>
-    <button on:click={handleLongBreak}>Long break</button>
+    <button on:click={() => handleTimer(timers.pomodoro)}>Pomodoro</button>
+    <button on:click={() => handleTimer(timers.short)}>Festa corta</button>
+    <button on:click={() => handleTimer(timers.long)}>Festa lunga</button>
+    <button on:click={() => handleTimer(timers.test)}>Test</button>
   </div>
 </main>
 
@@ -68,6 +95,15 @@
     text-align: center;
     padding: 1em;
     margin: 0 auto;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 0;
   }
 
   button.tomato {
@@ -86,7 +122,11 @@
 
   button.tomato:focus {
     outline: none;
-    box-shadow: 0px 0px 0px 2px green;
+    box-shadow: 0px 0px 0px 4px green;
+  }
+
+  button.tomato:hover {
+    cursor: pointer;
   }
 
   .stem {
