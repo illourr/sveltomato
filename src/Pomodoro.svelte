@@ -1,0 +1,59 @@
+<script>
+  export let text;
+  export let timeLeft;
+
+  const format = ms => {
+    const min = Math.floor(ms / 1000 / 60 / 60).toString();
+    const sec = Math.floor((ms / 1000) % 60).toString();
+    return `${min}:${sec.padStart(2, '0')}`;
+  };
+</script>
+
+<span class="stem">*</span>
+<button class="tomato" data-testid="tomato-button" on:click>
+  <p>{text}</p>
+  <h2>{format(timeLeft)}</h2>
+</button>
+
+<style>
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 0;
+  }
+
+  button.tomato {
+    color: white;
+    font-size: 400%;
+    border: none;
+    border-radius: 50%;
+    background-color: tomato;
+    width: 500px;
+    height: 500px;
+  }
+
+  button.tomato:active {
+    background-color: brown;
+  }
+
+  button.tomato:focus {
+    outline: none;
+    box-shadow: 0px 0px 0px 4px red;
+  }
+
+  button.tomato:hover {
+    cursor: pointer;
+  }
+
+  .stem {
+    font-size: 600%;
+    font-weight: 700;
+    color: limegreen;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+</style>
