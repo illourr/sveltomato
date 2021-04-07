@@ -45,6 +45,7 @@
       if (timeLeft <= 0) {
         timeLeft = 0;
         clearInterval(interval);
+        tomatoText = 'Festa!';
         // Make some noise
       }
     }, 1000);
@@ -102,11 +103,14 @@
         class={getActive(timers.long)}
         on:click={() => handleTimer(timers.long)}>Festa lunga</button
       >
+      {#if showTest}
+        <button
+          class={getActive(timers.long)}
+          on:click={() => handleTimer(timers.test)}>Test</button
+        >
+      {/if}
     </div>
     <button class="text" on:click={handleReset}>Reset</button>
-    {#if showTest}
-      <button on:click={() => handleTimer(timers.test)}>Test</button>
-    {/if}
   </div>
 </main>
 
