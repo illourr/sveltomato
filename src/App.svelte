@@ -23,11 +23,14 @@
   };
 
   // export let initialTime = timers.pomodoro.time;
+  const params = new URLSearchParams(window.location.search);
+  const showTest = params.get('test');
+  const seconds = params.get('seconds');
+
   let interval;
   let running = false;
   let currentTimer = timers.pomodoro;
-  let timeLeft = currentTimer.time;
-  const showTest = new URLSearchParams(window.location.search).get('test');
+  let timeLeft = seconds * 1000 || currentTimer.time;
 
   // custom timers
   // save timers
