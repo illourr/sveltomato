@@ -25,6 +25,7 @@
   let running = false;
   let currentTimer = timers.pomodoro;
   let timeLeft = currentTimer.time;
+  const showTest = new URLSearchParams(window.location.search).get('test');
 
   // custom timers
   // save timers
@@ -86,7 +87,9 @@
     <button on:click={() => handleTimer(timers.pomodoro)}>Pomodoro</button>
     <button on:click={() => handleTimer(timers.short)}>Festa corta</button>
     <button on:click={() => handleTimer(timers.long)}>Festa lunga</button>
-    <button on:click={() => handleTimer(timers.test)}>Test</button>
+    {#if showTest}
+      <button on:click={() => handleTimer(timers.test)}>Test</button>
+    {/if}
   </div>
 </main>
 
