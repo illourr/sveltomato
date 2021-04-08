@@ -39,6 +39,11 @@
 
   $: getActive = timer => (timer === currentTimer ? 'active' : '');
 
+  const playSound = () => {
+    const audio = new Audio('../audio/weird-scream.wav');
+    audio.play();
+  };
+
   const handlePlayPause = () => {
     return running ? pause() : play();
   };
@@ -51,6 +56,7 @@
         timeLeft = 0;
         clearInterval(interval);
         tomatoText = 'Festa!';
+        playSound();
         // Make some noise
       }
     }, 1000);
