@@ -40,7 +40,7 @@
   $: getActive = timer => (timer === currentTimer ? 'active' : '');
 
   const playSound = () => {
-    const audio = new Audio('../audio/weird-scream.wav');
+    const audio = new Audio('audio/weird-scream.wav');
     audio.play();
   };
 
