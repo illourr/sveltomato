@@ -56,4 +56,16 @@
     left: 50%;
     transform: translateX(-50%);
   }
+
+  @media screen and (max-width: 550px) {
+    button.tomato {
+      font-size: 12vw;
+      width: 80vw;
+      height: 80vw;
+    }
+
+    .stem {
+      font-size: 15vw;
+    }
+  }
 </style>
