@@ -2,17 +2,13 @@
   export let text;
   export let timeLeft;
 
-  const format = ms => {
-    const min = Math.floor(ms / 1000 / 60 / 60).toString();
-    const sec = Math.floor((ms / 1000) % 60).toString();
-    return `${min}:${sec.padStart(2, '0')}`;
-  };
+  import { formatTime } from './utils';
 </script>
 
 <span class="stem">*</span>
 <button class="tomato" data-testid="tomato-button" on:click>
   <p>{text}</p>
-  <h2>{format(timeLeft)}</h2>
+  <h2>{formatTime(timeLeft)}</h2>
 </button>
 
 <style>

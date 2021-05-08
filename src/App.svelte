@@ -1,5 +1,6 @@
 <script>
   import Pomodoro from './Pomodoro.svelte';
+  import { formatTime } from './utils';
 
   const MINUTES_IN_MS = 60 * 60 * 1000;
 
@@ -38,6 +39,7 @@
   let tomatoText = 'Lavora!';
 
   $: getActive = timer => (timer === currentTimer ? 'active' : '');
+  $: document.title = `${formatTime(timeLeft)} - Sveltomato`;
 
   const playSound = () => {
     const audio = new Audio('audio/weird-scream.wav');
