@@ -41,9 +41,9 @@ describe('App', () => {
 
     expect(tomatoBtn.textContent).toMatch(/25:00/);
 
-    await fireEvent.click(queryByTestId('tomato-button'));
+    await fireEvent.click(tomatoBtn);
     await jest.advanceTimersByTime(fiveMinutesInMs);
-    expect(queryByTestId('tomato-button').textContent).toMatch(/20:00/);
+    expect(tomatoBtn.textContent).toMatch(/20:00/);
 
     jest.runOnlyPendingTimers();
     jest.useRealTimers();
