@@ -2,7 +2,7 @@
   import Pomodoro from './Pomodoro.svelte';
   import { formatTime } from './utils';
 
-  const MINUTES_IN_MS = 60 * 60 * 1000;
+  const MINUTES_IN_MS = 60 * 1000;
 
   const timers = {
     pomodoro: {
@@ -31,7 +31,7 @@
   let interval;
   let running = false;
   let currentTimer = timers.pomodoro;
-  let timeLeft = seconds * 1000 || currentTimer.time;
+  let timeLeft = seconds ? seconds * 1000 : currentTimer.time;
 
   // custom timers
   // save timers
