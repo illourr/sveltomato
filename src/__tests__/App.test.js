@@ -60,9 +60,9 @@ describe('App', () => {
 
     expect(tomatoBtn.textContent).toMatch(/25:00/);
 
-    await fireEvent.click(queryByTestId('tomato-button'));
+    await fireEvent.click(tomatoBtn);
     await jest.advanceTimersByTime(twentyFiveMinutesInMs);
-    expect(queryByTestId('tomato-button').textContent).toMatch(/festa! 0:00/i);
+    expect(tomatoBtn.textContent).toMatch(/festa! 0:00/i);
 
     // A sound should be played once the timer has finished.
     // We use the AudioMock at the beginning of this test file to log when a sound 
