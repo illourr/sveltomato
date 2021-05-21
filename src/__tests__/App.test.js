@@ -3,17 +3,6 @@ import App from '../App';
 
 const { queryByRole, queryByText, queryByTestId } = screen;
 
-// AudioMock
-// Mock out browser Audio API because it doesn't exist in JSDom
-class AudioMock {
-  constructor(filename) {
-    this.filename = filename;
-  }
-  play() {
-    console.log(`Playing sound: ${this.filename}`);
-  }
-}
-
 describe('timers', () => {
   beforeEach(() => {
     jest.useFakeTimers();
