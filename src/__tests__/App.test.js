@@ -56,8 +56,6 @@ describe('timers', () => {
     expect(tomatoBtn.textContent).toMatch(/festa! 0:00/i);
 
     // A sound should be played once the timer has finished.
-    // We use the AudioMock at the beginning of this test file to log when a sound
-    // is played because there is no way to actually play the sound during a test.
     expect(audio.play).toHaveBeenCalled();
   });
 });
